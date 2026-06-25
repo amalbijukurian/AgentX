@@ -17,7 +17,7 @@ asda_mcp/
 ## Setup
 
 ```bash
-pip install mcp gitpython PyGithub python-dotenv
+pip install -r requirements.txt
 ```
 
 ## .env file
