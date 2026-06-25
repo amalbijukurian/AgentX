@@ -8,7 +8,7 @@ Usage:
     python test_llm.py
 """
 
-from llm import LLMLayer
+from RAG_and_Agents.llm import LLMLayer
 
 
 # ── Fake chunk (simulates what rag.retrieve() returns) ────────────────────────

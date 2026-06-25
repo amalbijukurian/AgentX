@@ -18,8 +18,8 @@ import os
 import sys
 from dotenv import load_dotenv
 
-from rag import RAGPipeline
-from llm import LLMLayer
+from RAG_and_Agents.rag import RAGPipeline
+from RAG_and_Agents.llm import LLMLayer
 
 load_dotenv()
 

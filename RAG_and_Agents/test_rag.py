@@ -11,7 +11,7 @@ You will be prompted for:
     - GitHub PAT       (needed for cloning; fine-grained or classic)
 """
 
-from rag import RAGPipeline
+from RAG_and_Agents.rag import RAGPipeline
 
 
 def main():
