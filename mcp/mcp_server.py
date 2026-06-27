@@ -21,9 +21,9 @@ from mcp.server.stdio import stdio_server
 from mcp.types import Tool, TextContent
 
 # Our tool functions
-from tools.file_tools import read_file, write_file, list_files, show_diff
-from tools.test_tools import run_tests, format_test_result
-from tools.git_tools import (
+from mcp.tools.file_tools import read_file, write_file, list_files, show_diff
+from mcp.tools.test_tools import run_tests, format_test_result
+from mcp.tools.git_tools import (
     clone_repository,
     create_branch,
     commit_changes,
@@ -31,7 +31,7 @@ from tools.git_tools import (
     get_current_branch,
     get_changed_files
 )
-from tools.github_tools import (
+from mcp.tools.github_tools import (
     open_pull_request,
     extract_repo_name,
     generate_pr_body

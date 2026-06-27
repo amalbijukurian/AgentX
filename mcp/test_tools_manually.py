@@ -35,7 +35,7 @@ def test(name, condition, detail=""):
 def test_file_tools():
     print("\n── FILE TOOLS ──────────────────────────────────")
 
-    from tools.file_tools import read_file, write_file, list_files, show_diff
+    from mcp.tools.file_tools import read_file, write_file, list_files, show_diff
 
     # Create a temp directory to work in
     tmpdir = tempfile.mkdtemp()
@@ -82,7 +82,7 @@ def test_file_tools():
 def test_test_tools():
     print("\n── TEST TOOLS ──────────────────────────────────")
 
-    from tools.test_tools import run_tests, format_test_result
+    from mcp.tools.test_tools import run_tests, format_test_result
 
     tmpdir = tempfile.mkdtemp()
 
@@ -130,7 +130,7 @@ def test_git_tools():
     import git
     import gc
     import time
-    from tools.git_tools import create_branch, commit_changes, get_changed_files, get_current_branch
+    from mcp.tools.git_tools import create_branch, commit_changes, get_changed_files, get_current_branch
 
     tmpdir = tempfile.mkdtemp()
     repo = None  # track repo so we can close it before cleanup
@@ -194,7 +194,7 @@ def test_git_tools():
 def test_github_tools():
     print("\n── GITHUB TOOLS ────────────────────────────────")
 
-    from tools.github_tools import extract_repo_name, generate_pr_body
+    from mcp.tools.github_tools import extract_repo_name, generate_pr_body
 
     # Test extract_repo_name
     name1 = extract_repo_name("https://github.com/niabob/my-project")
