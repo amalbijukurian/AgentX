@@ -1,0 +1,4 @@
+.env
+.asda/
+__pycache__/
+*.pyc
