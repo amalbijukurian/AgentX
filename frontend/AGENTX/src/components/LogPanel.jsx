@@ -1,8 +1,4 @@
-const logs = [
-  "Waiting for repository...",
-];
-
-function LogPanel() {
+function LogPanel({ logs }) {
   return (
     <div className="m-4 bg-slate-800 rounded-xl p-4">
 

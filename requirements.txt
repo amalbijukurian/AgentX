@@ -1,0 +1,17 @@
+chromadb
+sentence-transformers
+ 
+openai
+
+tree-sitter
+tree-sitter-language-pack
+
+mcp
+gitpython
+PyGithub
+python-dotenv
+pytest
+
+fastapi
+uvicorn
+pydantic

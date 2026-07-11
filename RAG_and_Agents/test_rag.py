@@ -11,7 +11,13 @@ You will be prompted for:
     - GitHub PAT       (needed for cloning; fine-grained or classic)
 """
 
-from RAG_and_Agents.rag import RAGPipeline
+try:
+    from RAG_and_Agents.rag import RAGPipeline
+except ModuleNotFoundError as e:
+    if e.name and e.name.split(".")[0] == "RAG_and_Agents":
+        from rag import RAGPipeline
+    else:
+        raise
 
 
 def main():

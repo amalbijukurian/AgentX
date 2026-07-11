@@ -8,6 +8,7 @@ If tests fail, it reads the error output and tries to fix again.
 
 import subprocess
 import os
+import sys
 
 
 def run_tests(repo_path: str) -> dict:
@@ -33,10 +34,11 @@ def run_tests(repo_path: str) -> dict:
             "summary": "Could not run tests"
         }
 
-    # Check pytest is available
+    # Use sys.executable so pytest runs in the same interpreter/venv as the
+    # agent — a bare "python" resolves via PATH and can hit the wrong install.
     # --tb=short means show short tracebacks (not full, not nothing)
     # -v means verbose (show each test name)
-    command = ["python", "-m", "pytest", "--tb=short", "-v"]
+    command = [sys.executable, "-m", "pytest", "--tb=short", "-v"]
 
     try:
         result = subprocess.run(

@@ -20,12 +20,14 @@ from typing import Optional
 from openai import OpenAI
 from dotenv import load_dotenv
 
-load_dotenv()
+# Explicit path — a bare load_dotenv() resolves against the cwd, which breaks
+# when the backend is launched from backend/ instead of this folder.
+load_dotenv(os.path.join(os.path.dirname(os.path.abspath(__file__)), ".env"))
 
 
 # ── Constants ────────────────────────────────────────────────────────────────
 
-MODEL          = "gpt-4o"
+MODEL          = "openai/gpt-oss-120b"
 MAX_TOKENS     = 4096
 TEMPERATURE    = 0.2      # low = more deterministic code output
 MAX_RETRIES    = 3        # max fix attempts on test failure
@@ -145,13 +147,13 @@ class LLMLayer:
     """
 
     def __init__(self):
-        api_key = os.getenv("OPENAI_API_KEY")
+        api_key = os.getenv("GROQ_API_KEY")
         if not api_key:
             raise EnvironmentError(
-                "OPENAI_API_KEY not found. "
+                "GROQ_API_KEY not found. "
                 "Add it to your .env file."
             )
-        self.client = OpenAI(api_key=api_key)
+        self.client = OpenAI(api_key=api_key, base_url="https://api.groq.com/openai/v1")
 
     # ── Public API ────────────────────────────────────────────────────────────
 

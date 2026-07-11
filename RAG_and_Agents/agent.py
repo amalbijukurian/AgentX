@@ -18,10 +18,19 @@ import os
 import sys
 from dotenv import load_dotenv
 
-from RAG_and_Agents.rag import RAGPipeline
-from RAG_and_Agents.llm import LLMLayer
+try:
+    from RAG_and_Agents.rag import RAGPipeline
+    from RAG_and_Agents.llm import LLMLayer
+except ModuleNotFoundError as e:
+    if e.name and e.name.split(".")[0] == "RAG_and_Agents":
+        # Running standalone from inside RAG_and_Agents/ — use bare imports
+        from rag import RAGPipeline
+        from llm import LLMLayer
+    else:
+        # A real dependency is missing (e.g. chromadb) — don't mask it
+        raise
 
-load_dotenv()
+load_dotenv(os.path.join(os.path.dirname(os.path.abspath(__file__)), ".env"))
 
 # ── Constants ─────────────────────────────────────────────────────────────────
 
@@ -247,11 +256,18 @@ class Agent:
         Falls back to a stub if tools.py isn't ready yet.
         """
         try:
-            from tools import ToolLayer
-            return ToolLayer(repo_path)
-        except ImportError:
-            print("[ASDA] Warning: tools.py not found — using stub.")
-            return ToolStub(repo_path)
+            from RAG_and_Agents.tools import ToolLayer
+        except ModuleNotFoundError as e:
+            if not (e.name and e.name.split(".")[0] == "RAG_and_Agents"):
+                raise  # real dependency missing inside tools.py — don't mask it
+            try:
+                from tools import ToolLayer
+            except ModuleNotFoundError as e2:
+                if e2.name != "tools":
+                    raise
+                print("[ASDA] Warning: tools.py not found — using stub.")
+                return ToolStub(repo_path)
+        return ToolLayer(repo_path)
 
     def _branch_name(self, task: str) -> str:
         """Generate a clean git branch name from the task string."""

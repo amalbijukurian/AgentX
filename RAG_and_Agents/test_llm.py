@@ -8,7 +8,13 @@ Usage:
     python test_llm.py
 """
 
-from RAG_and_Agents.llm import LLMLayer
+try:
+    from RAG_and_Agents.llm import LLMLayer
+except ModuleNotFoundError as e:
+    if e.name and e.name.split(".")[0] == "RAG_and_Agents":
+        from llm import LLMLayer
+    else:
+        raise
 
 
 # ── Fake chunk (simulates what rag.retrieve() returns) ────────────────────────
